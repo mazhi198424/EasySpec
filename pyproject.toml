@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "easyspec-shiyosho"
+version = "1.0.0"
+description = "Japanese-style detailed design specification (式様書) generator from Java project source code"
+requires-python = ">=3.10"
+dependencies = [
+    "openpyxl>=3.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
