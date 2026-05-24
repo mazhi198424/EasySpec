@@ -59,3 +59,28 @@ def test_column_with_default_value():
         assert tables[0].columns[1].default_value == "'下書き'"
     finally:
         os.unlink(tmp_path)
+
+
+def test_decimal_nested_parentheses():
+    sql = """CREATE TABLE IF NOT EXISTS orders (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    total_amount DECIMAL(12,2) NOT NULL DEFAULT 0,
+    unit_price DECIMAL(10,2)
+);"""
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.sql', delete=False, encoding='utf-8') as f:
+        f.write(sql)
+        tmp_path = f.name
+
+    try:
+        tables = parse_schema(tmp_path)
+        assert tables[0].name == "orders"
+        assert tables[0].columns[1].name == "total_amount"
+        assert tables[0].columns[1].type_name == "DECIMAL"
+        assert tables[0].columns[1].sql_type == "DECIMAL(12,2)"
+        assert tables[0].columns[1].length == 12
+        assert tables[0].columns[1].nullable is False
+        assert tables[0].columns[2].name == "unit_price"
+        assert tables[0].columns[2].type_name == "DECIMAL"
+        assert tables[0].columns[2].length == 10
+    finally:
+        os.unlink(tmp_path)
