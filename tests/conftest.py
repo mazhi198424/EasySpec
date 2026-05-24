@@ -5,7 +5,7 @@ import os
 @pytest.fixture
 def visiondemo_path():
     """VisionDemo プロジェクトの絶対パス"""
-    return os.path.join(os.path.dirname(__file__), '..', '..', '..', 'VisionDemo')
+    return os.path.join(os.path.dirname(__file__), '..', '..', 'VisionDemo')
 
 
 @pytest.fixture
