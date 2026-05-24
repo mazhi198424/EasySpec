@@ -63,7 +63,7 @@ def generate(project_path: str, output_path: str):
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     default_project = os.path.join(script_dir, '..', 'VisionDemo')
-    default_output = os.path.join(default_project, 'docs', 'shiyosho',
+    default_output = os.path.join(script_dir, 'result', 'shiyosho',
                                   'VisionDemo_式様書_v1.0.xlsx')
 
     project_path = sys.argv[1] if len(sys.argv) > 1 else default_project
